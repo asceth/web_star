@@ -1,0 +1,41 @@
+web_session:continue ->
+  {error, Error}
+  {redirect, Url}
+  {redirect, StatusCode, Url}
+  ok
+
+session_modifiers() ->
+  [{web_session:function, [Args]}]
+
+
+Hooks:
+
+session -> Internal use only, returns a usable session (new or old) for the rest of the request
+
+Method.pre_request.global -> session_modifiers()
+
+continue?
+
+Method.pre_request.Path -> session_modifiers()
+
+continue?
+
+Method.request.global -> session_modifiers()
+
+continue?
+
+Method.request.Path -> session_modifiers()
+
+continue?
+
+Method.pre_request_view.global -> iolist()
+Method.pre_request_view.View -> iolist()
+Method.request_view.global -> iolist()
+Method.request_view.View -> iolist()
+Method.post_request_view.View -> iolist()
+Method.post_request_view.global -> iolist()
+
+Method.request_layout_view.global
+
+Method.post_request.global -> session_modifiers()
+Method.post_request.Path -> session_modifiers()
